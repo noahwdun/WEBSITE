@@ -1,0 +1,103 @@
+:root { color-scheme: light; }
+html,body{height:100%}
+body{
+  margin:0;
+  background:#fff;
+  color:#000;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Courier New', monospace;
+  font-size:16px;
+  line-height:1.45;
+  -webkit-font-smoothing:antialiased;
+  padding:36px 48px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+
+  /* grid */
+  background-image:
+    linear-gradient(transparent calc(100% - 1px), rgba(32,66,125,0.1) 2px),
+    linear-gradient(90deg, transparent calc(100% - 1px), rgba(32,66,125,0.1) 2px);
+  background-size: 20px 20px, 20px 20px;
+  /* keep the grid visually fixed while the page content scrolls */
+  background-attachment: fixed, fixed;
+  background-repeat: repeat;
+}
+.container{
+  max-width:720px;
+  width:100%;
+  /* don't preserve HTML newlines between elements — apply pre-wrap only to <pre> blocks */
+  white-space: normal;
+  font-variant-numeric: tabular-nums;
+}
+.container pre,
+article pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+/* Minimal text-only navbar */
+nav.nav { margin-bottom:0; }
+nav.nav pre{ margin:0; padding:0; font-size:0.95em; }
+nav.nav a{ color:inherit; text-decoration:none; }
+nav.nav a:hover, nav.nav a:focus { text-decoration:underline; }
+.small{font-size:0.95em}
+footer{margin-top:18px; color:#333; font-size:0.9em}
+
+/* Site header styling */
+.site-header{
+  /* spacing from nav: ~2 line-heights */
+  margin-top: 2em;
+}
+.site-header h1{
+  margin:0 0 0.5em 0;
+  color: #ff0000; /* red */
+  font-family: "Arial Black", Gadget, sans-serif;
+  font-weight: 900;
+  font-size: 1.25em;
+  line-height: 1;
+  display: block;       /* ensure block-level */
+  width: 100%;          /* take full container width */
+  text-align: left !important; /* force left alignment */
+  margin-left: 0;       /* ensure no left offset */
+  align-self: flex-start; /* in case parent is a flex container */
+}
+
+/* Photo collections previews on the photo page */
+.collections{
+  display:flex;
+  flex-direction:column;
+  gap:1.25rem;
+}
+.collection{
+  border: none; /* remove border around collection previews */
+  padding:0.6rem;
+  background: transparent; /* fully transparent preview background */
+}
+.collection-link h2{ 
+  font: inherit; /* match body text */
+  font-weight: normal;
+  margin: 0 0 0.5rem 0;
+  color: inherit;
+}
+.collection-link{ display:block; color:inherit; text-decoration:none; }
+.collection-preview{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  overflow:hidden;
+  white-space:nowrap;
+}
+.collection-preview .thumb{
+  flex: 0 0 auto;
+}
+.collection-preview img{
+  display:block;
+  height:120px; /* 1.5x larger */
+  width:auto;
+  border-radius:0; /* no rounded corners */
+  object-fit:cover;
+}
+
+/* Collection page gallery: vertical list with minimal styling */
+.gallery{ display:block; }
+.gallery img{ display:block; width:100%; max-width:720px; margin:0 0 1rem 0; border-radius:0; }
+
