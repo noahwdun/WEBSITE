@@ -1,1 +1,1 @@
-[noahduncan.net](https://www.noahduncan.net)
+check out [noahduncan.net](https://www.noahduncan.net)
