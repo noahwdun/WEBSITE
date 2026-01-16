@@ -28,6 +28,7 @@ body{
   /* don't preserve HTML newlines between elements — apply pre-wrap only to <pre> blocks */
   white-space: normal;
   font-variant-numeric: tabular-nums;
+  padding-bottom: 4rem; /* bottom padding space */
 }
 .container pre,
 article pre {
