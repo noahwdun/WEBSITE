@@ -11,9 +11,11 @@
         const headers = lines[0].split(',');
         
         // Find column indices
+        const yearIndex = headers.findIndex(h => h.trim() === 'year');
         const titleIndex = headers.findIndex(h => h.trim() === 'title');
         const linkIndex = headers.findIndex(h => h.trim() === 'link');
         const outletIndex = headers.findIndex(h => h.trim() === 'outlet');
+        const typeIndex = headers.findIndex(h => h.trim() === 'type');
         
         // Parse CSV with proper quote handling
         function parseCSVLine(line) {
@@ -42,9 +44,11 @@
           if (lines[i].trim()) {
             const cells = parseCSVLine(lines[i]);
             articles.push({
+              year: cells[yearIndex],
               title: cells[titleIndex],
               link: cells[linkIndex],
-              outlet: cells[outletIndex]
+              outlet: cells[outletIndex],
+              type: typeIndex !== -1 ? cells[typeIndex] : ''
             });
           }
         }
@@ -54,13 +58,22 @@
         if (article) {
           const preElement = article.querySelector('pre');
           if (preElement) {
-            // Create the formatted list
-            let html = '<ul>';
-            articles.forEach(article => {
-              html += `<li><a href="${article.link}">"${article.title}"</a> in <i>${article.outlet}</i></li>`;
+            // Group articles by year and format as HTML
+            let html = '';
+            let lastYear = null;
+            articles.forEach((article, idx) => {
+              if (article.year !== lastYear) {
+                if (lastYear !== null) html += '</ul>';
+                  html += `<div class="writing-year">${article.year}</div><ul style="margin-top:0">`;
+                lastYear = article.year;
+              }
+              html += `<li><a href="${article.link}">"${article.title}"</a>`;
+              if (article.type && article.type.trim()) {
+                html += ` (${article.type.trim()})`;
+              }
+              html += ` in <i>${article.outlet}</i></li>`;
             });
-            html += '</ul>';
-            
+            if (lastYear !== null) html += '</ul>';
             preElement.innerHTML = html;
           }
         }
