@@ -67,7 +67,7 @@
                   html += `<div class="writing-year">${article.year}</div><ul style="margin-top:0">`;
                 lastYear = article.year;
               }
-              html += `<li><a href="${article.link}">"${article.title}"</a>`;
+              html += `<li><a href="${article.link}" target="_blank" rel="noopener noreferrer">"${article.title}"</a>`;
               if (article.type && article.type.trim()) {
                 html += ` (${article.type.trim()})`;
               }
