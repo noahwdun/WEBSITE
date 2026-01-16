@@ -1,1 +1,1 @@
-noahduncan.net
+[noahduncan.net](noahduncan.net)
