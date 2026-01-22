@@ -23,7 +23,7 @@ body{
   background-repeat: repeat;
 }
 .container{
-  max-width:720px;
+  max-width:1080px;
   width:100%;
   /* don't preserve HTML newlines between elements — apply pre-wrap only to <pre> blocks */
   white-space: normal;
@@ -65,7 +65,7 @@ nav.nav .nav-box{ border: 1px solid rgba(32, 66, 125, 0.3); border-top: none; ba
   color: #ff0000; /* red */
   font-family: "Arial Black", Gadget, sans-serif;
   font-weight: 900;
-  font-size: 1.6em;
+  font-size: 1.5em;
   line-height: 1;
   display: block;       /* ensure block-level */
   width: 100%;          /* take full container width */
@@ -112,7 +112,7 @@ nav.nav .nav-box{ border: 1px solid rgba(32, 66, 125, 0.3); border-top: none; ba
 
 /* Collection page gallery: vertical list with minimal styling */
 .gallery{ display:block; }
-.gallery img{ display:block; width:100%; max-width:720px; margin:0 0 1rem 0; border-radius:0; }
+.gallery img{ display:block; width:100%; max-width:1080px; margin:0 0 1rem 0; border-radius:0; }
 
 /* Site-wide footer */
 .site-footer {
@@ -122,7 +122,7 @@ nav.nav .nav-box{ border: 1px solid rgba(32, 66, 125, 0.3); border-top: none; ba
   right: 0;
   margin: 0 auto;
   background: #fff;
-  max-width: 720px;
+  max-width: 1120px;
   padding: 4px 12px;
   width: 100%;
   box-sizing: border-box;
@@ -149,7 +149,7 @@ nav.nav .nav-box{ border: 1px solid rgba(32, 66, 125, 0.3); border-top: none; ba
 }
 
 .nav-flex {
-  max-width: 720px;
+  max-width: 1080px;
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -192,6 +192,24 @@ nav.nav .nav-box{ border: 1px solid rgba(32, 66, 125, 0.3); border-top: none; ba
   }
   .nav-links .bullet {
     display: none;
+  }
+}
+
+@media (max-width: 1140px) {
+  .site-footer {
+    max-width: none !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin: 0 !important;
+  }
+}
+
+@media (max-width: 1000px) {
+  article img {
+    float: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block;
   }
 }
 
