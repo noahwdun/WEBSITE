@@ -16,6 +16,7 @@
         const linkIndex = headers.findIndex(h => h.trim() === 'link');
         const outletIndex = headers.findIndex(h => h.trim() === 'outlet');
         const typeIndex = headers.findIndex(h => h.trim() === 'type');
+        const sectionIndex = headers.findIndex(h => h.trim() === 'section');
         
         // Parse CSV with proper quote handling
         function parseCSVLine(line) {
@@ -48,7 +49,8 @@
               title: cells[titleIndex],
               link: cells[linkIndex],
               outlet: cells[outletIndex],
-              type: typeIndex !== -1 ? cells[typeIndex] : ''
+              type: typeIndex !== -1 ? cells[typeIndex] : '',
+              section: sectionIndex !== -1 ? cells[sectionIndex].toLowerCase().trim() : ''
             });
           }
         }
@@ -58,22 +60,54 @@
         if (article) {
           const preElement = article.querySelector('pre');
           if (preElement) {
-            // Group articles by year and format as HTML
-            let html = '';
-            let lastYear = null;
-            articles.forEach((article, idx) => {
-              if (article.year !== lastYear) {
-                if (lastYear !== null) html += '</ul>';
-                  html += `<div class="writing-year">${article.year}</div><ul style="margin-top:0">`;
-                lastYear = article.year;
+            // Group articles by section and format as HTML
+            const groups = {
+              'academic': [],
+              'the miscellany news': [],
+              'creative': []
+            };
+
+            articles.forEach(article => {
+              const section = (article.section || '').toLowerCase();
+              if (groups[section]) {
+                groups[section].push(article);
+              } else {
+                groups['the miscellany news'].push(article);
               }
-              html += `<li><a href="${article.link}" target="_blank" rel="noopener noreferrer">"${article.title}"</a>`;
-              if (article.type && article.type.trim()) {
-                html += ` (${article.type.trim()})`;
-              }
-              html += ` in <i>${article.outlet}</i></li>`;
             });
-            if (lastYear !== null) html += '</ul>';
+
+            const renderSection = (name, items) => {
+              let sectionHtml = `<div class="writing-section"><t>${name}</t>`;
+              if (items.length === 0) {
+                sectionHtml += '<p><em>' + (name === 'academic' ? 'Academic work placeholder (coming soon).' : 'No entries yet.') + '</em></p>';
+              } else {
+                sectionHtml += '<ul style="margin-top:0">';
+                items.forEach(item => {
+                  let line = `<li><a href="${item.link}" target="_blank" rel="noopener noreferrer">"${item.title}"</a>`;
+                  if (name !== 'the miscellany news') {
+                    line += ` in <i>${item.outlet}</i>`;
+                  }
+                  if (name === 'creative' && item.type && item.type.trim()) {
+                    line += ` (${item.type.trim()}) (${item.year})`;
+                  } else {
+                    line += ` (${item.year})`;
+                    if (item.type && item.type.trim()) {
+                      line += ` (${item.type.trim()})`;
+                    }
+                  }
+                  line += '</li>';
+                  sectionHtml += line;
+                });
+                sectionHtml += '</ul>';
+              }
+              sectionHtml += '</div>';
+              return sectionHtml;
+            };
+
+            let html = '';
+            html += renderSection('academic', groups['academic']);
+            html += renderSection('the miscellany news', groups['the miscellany news']);
+            html += renderSection('creative', groups['creative']);
             preElement.innerHTML = html;
           }
         }
