@@ -12,6 +12,7 @@ body{
   display:flex;
   align-items:flex-start;
   justify-content:center;
+  min-width:400px;
 
   /* grid */
   background-image:
@@ -154,8 +155,9 @@ nav.nav .nav-box{ border: 1px solid rgba(32, 66, 125, 0.3); border-top: none; ba
   margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  flex-wrap: nowrap;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 .nav-box {
   margin-right: 24px;
@@ -220,4 +222,31 @@ nav.nav .nav-box{ border: 1px solid rgba(32, 66, 125, 0.3); border-top: none; ba
 
 .gallery img.loaded {
   opacity: 1;
+}
+
+/* Top right button styling */
+.top-right-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: rgb(32, 66, 125);
+  color: #fff !important;
+  width: 40px;
+  height: 40px;
+  border-radius: 25%;
+  font-size: 1.2em;
+  font-weight: 500;
+  text-decoration: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+  z-index: 999;
+}
+
+.top-right-btn:hover,
+.top-right-btn:focus {
+  background-color: rgb(22, 46, 95);
+  text-decoration: none !important;
 }
